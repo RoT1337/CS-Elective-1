@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="outstyle.css" rel="stylesheet"/>
+    <title>Collaborative Filtering Program</title>
+</head>
+<body>
+    <div id="container">
+        <div id="form">
+            <div id="name">
+                Input your name <input type="text" id="userName"><br><br>
+            </div>
+            <div id="list">
+                <form action="" id="gameForm">
+
+                    <div id="timeframes">
+                        <p>Check the boxes of the times you are in the bouldering gym:</p>
+                        <input type="checkbox" id="timeframe1" name="timeframe1" value="opening">
+                        <label for="timeframe1"> 10:00 A.M.- 12:00 P.M. </label><br>
+                        <input type="checkbox" id="timeframe2" name="timeframe2" value="elevenone">
+                        <label for="timeframe2"> 12:00 A.M. - 2:00 P.M.</label><br>
+                        <input type="checkbox" id="timeframe3" name="timeframe3" value="twelvetwo">
+                        <label for="timeframe3"> 2:00 P.M. - 4:00 P.M.</label><br>
+                        <input type="checkbox" id="timeframe4" name="timeframe4" value="onethree">
+                        <label for="timeframe4"> 4:00 P.M. - 6:00 P.M.</label><br>
+                        <input type="checkbox" id="timeframe5" name="timeframe5" value="sixeight">
+                        <label for="timeframe5"> 6:00 P.M. - 8:00 P.M.</label><br>
+                        <input type="checkbox" id="timeframe6" name="timeframe6" value="closing">
+                        <label for="timeframe6"> 8:00 P.M. - 10:00 P.M.</label><br><br>
+                    </div>
+
+                    <div id="grades">
+                        <p>Check the boxes of your preferred climbing grades:</p>
+                        <input type="checkbox" id="grade1" name="grade1" value="v0v1">
+                        <label for="grade1"> V0-V1 </label><br>
+                        <input type="checkbox" id="grade2" name="grade2" value="v1v2">
+                        <label for="grade2"> V1-V2 </label><br>
+                        <input type="checkbox" id="grade3" name="grade3" value="v2v3">
+                        <label for="grade3"> V2-V3 </label><br>
+                        <input type="checkbox" id="grade4" name="grade4" value="v3v4">
+                        <label for="grade4"> V3-V4 </label><br>
+                        <input type="checkbox" id="grade5" name="grade5" value="v4v5">
+                        <label for="grade5"> V4-V5 </label><br>
+                        <input type="checkbox" id="grade6" name="grade6" value="v6+">
+                        <label for="grade6"> V6 and beyond </label><br><br>
+                    </div>
+
+                    <div id="problems">
+                        <p>Check the boxes of your preferred bouldering problems:</p>
+                        <input type="checkbox" id="problem1" name="problem1" value="overhand">
+                        <label for="problem1"> Overhangs </label><br>
+                        <input type="checkbox" id="problem2" name="problem2" value="slab">
+                        <label for="problem2"> Slabs </label><br>
+                        <input type="checkbox" id="problem3" name="problem3" value="vertical">
+                        <label for="problem3"> Verticals </label><br>
+                        <input type="checkbox" id="problem4" name="problem4" value="arete">
+                        <label for="problem4"> Arete </label><br>
+                        <input type="checkbox" id="problem5" name="problem5" value="dyno">
+                        <label for="problem5"> Dynamics / Dynos </label><br>
+                        <input type="checkbox" id="problem6" name="problem6" value="crimpy">
+                        <label for="problem6"> Crimps </label><br><br>
+                    </div>
+                </form>
+                <button id="submit">
+                    Submit for Current User
+                </button>
+                <div id="find">
+                    Input Name for Matching<input type="text" id="match"><br>
+                    <button id="btn-match">
+                        Look for partners
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="filteringscript.js"></script>
+</html>
