@@ -120,9 +120,22 @@ def open_problems_window():
     problems_button.pack(pady=12, padx=10)
 
 def finish():
+    global count
     problems_window.destroy()
     root.deiconify()
+    count += 1
     messagebox.showinfo("Info", "User data saved")
+
+    if count == 2:
+        new_frame = ck.CTkFrame(master=root)
+        new_frame.pack(pady=10, padx=10, fill="both", expand=True)
+        label = ck.CTkLabel(master=new_frame, text="Search for a bouldering partner!")
+        label.pack(pady=12, padx=10)
+        entry2 = ck.CTkEntry(master=new_frame, placeholder_text="Input Name")
+        entry2.pack(pady=12, padx=10)
+        button1 = ck.CTkButton(master=new_frame, text="Find a Partner", hover_color="green")
+        button1.pack(pady=12, padx=10)
+        root.geometry("400x450")
 
 def btn_continue():
     name = entry1.get()
@@ -147,6 +160,8 @@ root.geometry(f'{window_width}x{window_height}+{position_right}+{position_top}')
 
 frame = ck.CTkFrame(master=root)
 frame.pack(pady=10, padx=10, fill="both", expand=True)
+
+root.title("Bouldering Partner Finder")
 
 entry1 = ck.CTkEntry(master=frame, placeholder_text="Input Your Name Here")
 entry1.pack(pady=12, padx=10)
