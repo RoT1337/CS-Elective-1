@@ -10,24 +10,24 @@ root.geometry("400x300")
 
 count = 0
 
-timeframe1_var = tk.BooleanVar()
-timeframe2_var = tk.BooleanVar()
-timeframe3_var = tk.BooleanVar()
-timeframe4_var = tk.BooleanVar()
-timeframe5_var = tk.BooleanVar()
-timeframe6_var = tk.BooleanVar()
-grades1_var = tk.BooleanVar()
-grades2_var = tk.BooleanVar()
-grades3_var = tk.BooleanVar()
-grades4_var = tk.BooleanVar()
-grades5_var = tk.BooleanVar()
-grades6_var = tk.BooleanVar()
-problem1_var = tk.BooleanVar()
-problem2_var = tk.BooleanVar()
-problem3_var = tk.BooleanVar()
-problem4_var = tk.BooleanVar()
-problem5_var = tk.BooleanVar()
-problem6_var = tk.BooleanVar()
+timeframe1_var = tk.BooleanVar(value=False)
+timeframe2_var = tk.BooleanVar(value=False)
+timeframe3_var = tk.BooleanVar(value=False)
+timeframe4_var = tk.BooleanVar(value=False)
+timeframe5_var = tk.BooleanVar(value=False)
+timeframe6_var = tk.BooleanVar(value=False)
+grades1_var = tk.BooleanVar(value=False)
+grades2_var = tk.BooleanVar(value=False)
+grades3_var = tk.BooleanVar(value=False)
+grades4_var = tk.BooleanVar(value=False)
+grades5_var = tk.BooleanVar(value=False)
+grades6_var = tk.BooleanVar(value=False)
+problem1_var = tk.BooleanVar(value=False)
+problem2_var = tk.BooleanVar(value=False)
+problem3_var = tk.BooleanVar(value=False)
+problem4_var = tk.BooleanVar(value=False)
+problem5_var = tk.BooleanVar(value=False)
+problem6_var = tk.BooleanVar(value=False)
 
 user_inputs = []
 
@@ -56,7 +56,6 @@ def save_user_inputs():
         problem6_var.get()
     ]
     user_inputs.append(user_data)
-
 
 def open_timeframe_window():
     global timeframe_window
@@ -179,8 +178,8 @@ def finish():
     save_user_inputs()
     messagebox.showinfo("Info", "User data saved")
 
-    name = entry1.get()
-    print_user_data(name)
+    print_user_data()
+    reset_variables()
 
     if count == 2:
         new_frame = ck.CTkFrame(master=root)
@@ -203,12 +202,31 @@ def btn_continue():
 def btn_exit():
     root.destroy()
 
-def print_user_data(name):
+def print_user_data():
+    print("Currently saved users: ")
     for user_data in user_inputs:
-        if user_data[0] == name:
-            print(f"Data for {name}: {user_data}")
-            return
-    print(f"No data found for user: {name}")
+        print(f"{user_data[0]}: {user_data}")
+    
+def reset_variables():
+    entry1.delete(0, tk.END)
+    timeframe1_var.set(False)
+    timeframe2_var.set(False)
+    timeframe3_var.set(False)
+    timeframe4_var.set(False)
+    timeframe5_var.set(False)
+    timeframe6_var.set(False)
+    grades1_var.set(False)
+    grades2_var.set(False)
+    grades3_var.set(False)
+    grades4_var.set(False)
+    grades5_var.set(False)
+    grades6_var.set(False)
+    problem1_var.set(False)
+    problem2_var.set(False)
+    problem3_var.set(False)
+    problem4_var.set(False)
+    problem5_var.set(False)
+    problem6_var.set(False)
 
 window_width = 400
 window_height = 300
