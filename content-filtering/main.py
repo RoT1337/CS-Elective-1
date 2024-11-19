@@ -1,6 +1,8 @@
 import customtkinter as ck
 import tkinter as tk
 from tkinter import messagebox
+import numpy as np
+from numpy.linalg import norm
 
 ck.set_appearance_mode("dark")
 ck.set_default_color_theme("dark-blue")
@@ -181,14 +183,15 @@ def finish():
     print_user_data()
     reset_variables()
 
-    if count == 2:
+    if count == 4:
         new_frame = ck.CTkFrame(master=root)
         new_frame.pack(pady=10, padx=10, fill="both", expand=True)
         label = ck.CTkLabel(master=new_frame, text="Search for a bouldering partner!")
         label.pack(pady=12, padx=10)
+        global entry2
         entry2 = ck.CTkEntry(master=new_frame, placeholder_text="Input Name")
         entry2.pack(pady=12, padx=10)
-        button1 = ck.CTkButton(master=new_frame, text="Find a Partner", hover_color="green")
+        button1 = ck.CTkButton(master=new_frame, text="Find a Partner", hover_color="green", command=find_partner)
         button1.pack(pady=12, padx=10)
         root.geometry("400x450")
 
@@ -227,6 +230,43 @@ def reset_variables():
     problem4_var.set(False)
     problem5_var.set(False)
     problem6_var.set(False)
+
+def calculate_cosine_similarity(user_name):
+    # Convert user data to vectors
+    user_vectors = []
+    target_vector = None
+    for user_data in user_inputs:
+        vector = [1 if val else 0 for val in user_data[1:]]
+        user_vectors.append(vector)
+        if user_data[0] == user_name:
+            target_vector = vector
+    
+    if target_vector is None:
+        print(f"No data found for user: {user_name}")
+        return
+    
+    # Calculate cosine similarity between the target user and other users
+    user_vectors = np.array(user_vectors)
+    target_vector = np.array(target_vector)
+    num_users = len(user_vectors)
+    similarity_scores = []
+
+    for i in range(num_users):
+        if user_inputs[i][0] != user_name:
+            similarity = np.dot(target_vector, user_vectors[i]) / (np.linalg.norm(target_vector) * np.linalg.norm(user_vectors[i]))
+            similarity_scores.append((user_inputs[i][0], similarity))
+
+    # Sort by similarity score in descending order
+    similarity_scores.sort(key=lambda x: x[1], reverse=True)
+
+    print(f"Cosine Similarity Scores for {user_name}:")
+    for name, score in similarity_scores:
+        print(f"{name}: {score}")
+
+def find_partner():
+    name = entry2.get()
+    calculate_cosine_similarity(name)
+
 
 window_width = 400
 window_height = 300
