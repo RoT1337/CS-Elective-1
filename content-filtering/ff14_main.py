@@ -12,12 +12,28 @@ root.geometry("400x300")
 
 # count = 0
 
-user_inputs = []
+user_inputs = [
+    ["User1", 50, 0, 75, 20, 0, 60, 0, 80, 0, 90, 0, 70, 0, 85, 0, 95, 0, 50, 0, 60],
+    ["User2", 0, 40, 0, 60, 0, 80, 0, 100, 0, 20, 0, 40, 0, 60, 0, 80, 0, 70, 0, 50],
+    ["User3", 30, 0, 50, 0, 70, 0, 90, 0, 10, 0, 30, 0, 50, 0, 70, 0, 60, 0, 40],
+    ["User4", 0, 20, 0, 40, 0, 60, 0, 80, 0, 100, 0, 20, 0, 40, 0, 60, 0, 50, 0, 30],
+    ["User5", 10, 0, 30, 0, 50, 0, 70, 0, 90, 0, 10, 0, 30, 0, 50, 0, 40, 0, 20],
+    ["User6", 0, 60, 0, 80, 0, 100, 0, 20, 0, 40, 0, 60, 0, 80, 0, 100, 0, 90, 0, 70],
+    ["User7", 70, 0, 90, 0, 10, 0, 30, 0, 50, 0, 70, 0, 90, 0, 10, 0, 80, 0, 60],
+    ["User8", 0, 50, 0, 70, 0, 90, 0, 10, 0, 30, 0, 50, 0, 70, 0, 90, 0, 100, 0, 80],
+    ["User9", 20, 0, 40, 0, 60, 0, 80, 0, 100, 0, 20, 0, 40, 0, 60, 0, 70, 0, 50],
+    ["User10", 0, 30, 0, 50, 0, 70, 0, 90, 0, 10, 0, 30, 0, 50, 0, 60, 0, 40, 0, 20]
+]
 
+# 20 Jobs
 paladin_level_var = tk.StringVar()
 warrior_level_var = tk.StringVar()
 dark_knight_level_var = tk.StringVar()
 gunbreaker_level_var = tk.StringVar()
+dragoon_level_var = tk.StringVar()
+reaper_level_var = tk.StringVar()
+monk_level_var = tk.StringVar()
+samurai_level_var = tk.StringVar()
 ninja_level_var = tk.StringVar()
 viper_level_var = tk.StringVar()
 bard_level_var = tk.StringVar()
@@ -38,6 +54,18 @@ def validate_number_input(event):
         entry.delete(0, tk.END)
         entry.insert(0, ''.join(filter(str.isdigit, value)))
 
+# ToDo: This PoS is putting out a white background and even bg_color cant fix.
+# I might turn into a valve developer and start crashing out I swear
+def create_input_frame(master, label_text, textvariable): 
+    frame = tk.Frame(master)
+    frame.pack(pady=12, padx=10, fill='x')
+    label = ck.CTkLabel(master=frame, text=label_text, bg_color="black")
+    label.pack(side='left')
+    entry = ck.CTkEntry(master=frame, textvariable=textvariable, width=200, bg_color="black")
+    entry.pack(side='left', padx=10)
+    entry.bind("<KeyRelease>", validate_number_input)
+    return entry
+
 def open_tank_window():
     global tank_window
     root.withdraw()
@@ -55,21 +83,10 @@ def open_tank_window():
     label = ck.CTkLabel(master=tank_window, text="Input your Warrior of Light's Tank Levels")
     label.pack(pady=12, padx=10)
 
-    paladin_level = ck.CTkEntry(master=tank_window, textvariable=paladin_level_var, placeholder_text="Paladin Level")
-    paladin_level.pack(pady=12, padx=10)
-    paladin_level.bind("<KeyRelease>", validate_number_input)
-
-    warrior_level = ck.CTkEntry(master=tank_window, textvariable=warrior_level_var, placeholder_text="Warrior Level")
-    warrior_level.pack(pady=12, padx=10)
-    warrior_level.bind("<KeyRelease>", validate_number_input)
-
-    dark_knight_level = ck.CTkEntry(master=tank_window, textvariable=dark_knight_level_var, placeholder_text="Dark Knight Level")
-    dark_knight_level.pack(pady=12, padx=10)
-    dark_knight_level.bind("<KeyRelease>", validate_number_input)
-
-    gunbreaker_level = ck.CTkEntry(master=tank_window, textvariable=gunbreaker_level_var, placeholder_text="Gunbreaker Level")
-    gunbreaker_level.pack(pady=12, padx=10)
-    gunbreaker_level.bind("<KeyRelease>", validate_number_input)
+    create_input_frame(tank_window, "Paladin Level", paladin_level_var)
+    create_input_frame(tank_window, "Warrior Level", warrior_level_var)
+    create_input_frame(tank_window, "Dark Knight Level", dark_knight_level_var)
+    create_input_frame(tank_window, "Gunbreaker Level", gunbreaker_level_var)
 
     tank_button = ck.CTkButton(master=tank_window, text="Continue", command=open_meleedps_window)
     tank_button.pack(pady=12, padx=10)
@@ -90,13 +107,12 @@ def open_meleedps_window():
     label = ck.CTkLabel(master=meleedps_window, text="Input your Warrior of Light's Melee DPS Levels")
     label.pack(pady=12, padx=10)
 
-    ninja_level = ck.CTkEntry(master=meleedps_window, textvariable=ninja_level_var, placeholder_text="Ninja Level")
-    ninja_level.pack(pady=12, padx=10)
-    ninja_level.bind("<KeyRelease>", validate_number_input)
-
-    viper_level = ck.CTkEntry(master=meleedps_window, textvariable=viper_level_var, placeholder_text="Viper Level")
-    viper_level.pack(pady=12, padx=10)
-    viper_level.bind("<KeyRelease>", validate_number_input)
+    create_input_frame(meleedps_window, "Dragoon Level", dragoon_level_var)
+    create_input_frame(meleedps_window, "Reaper Level", reaper_level_var)
+    create_input_frame(meleedps_window, "Monk Level", monk_level_var)
+    create_input_frame(meleedps_window, "Samurai Level", samurai_level_var)
+    create_input_frame(meleedps_window, "Ninja Level", ninja_level_var)
+    create_input_frame(meleedps_window, "Viper Level", viper_level_var)
 
     meleedps_button = ck.CTkButton(master=meleedps_window, text="Submit", command=open_physrange_dps)
     meleedps_button.pack(pady=12, padx=10)
@@ -117,17 +133,9 @@ def open_physrange_dps():
     label = ck.CTkLabel(master=physrange_window, text="Input your Warrior of Light's Physical Ranged DPS Levels")
     label.pack(pady=12, padx=10)
 
-    bard_level = ck.CTkEntry(master=physrange_window, textvariable=bard_level_var, placeholder_text="Bard Level")
-    bard_level.pack(pady=12, padx=10)
-    bard_level.bind("<KeyRelease>", validate_number_input)
-
-    machinist_level = ck.CTkEntry(master=physrange_window, textvariable=machinist_level_var, placeholder_text="Machinist Level")
-    machinist_level.pack(pady=12, padx=10)
-    machinist_level.bind("<KeyRelease>", validate_number_input)
-
-    dancer_level = ck.CTkEntry(master=physrange_window, textvariable=dancer_level_var, placeholder_text="Dancer Level")
-    dancer_level.pack(pady=12, padx=10)
-    dancer_level.bind("<KeyRelease>", validate_number_input)
+    create_input_frame(physrange_window, "Bard Level", bard_level_var)
+    create_input_frame(physrange_window, "Machinist Level", machinist_level_var)
+    create_input_frame(physrange_window, "Dancer Level", dancer_level_var)
 
     physrange_button = ck.CTkButton(master=physrange_window, text="Submit", command=open_magirange_dps)
     physrange_button.pack(pady=12, padx=10)
@@ -148,17 +156,9 @@ def open_magirange_dps():
     label = ck.CTkLabel(master=magirange_window, text="Input your Warrior of Light's Magical Ranged DPS Levels")
     label.pack(pady=12, padx=10)
 
-    black_mage_level = ck.CTkEntry(master=magirange_window, textvariable=black_mage_level_var, placeholder_text="Black Mage Level")
-    black_mage_level.pack(pady=12, padx=10)
-    black_mage_level.bind("<KeyRelease>", validate_number_input)
-
-    summoner_level = ck.CTkEntry(master=magirange_window, textvariable=summoner_level_var, placeholder_text="Summoner Level")
-    summoner_level.pack(pady=12, padx=10)
-    summoner_level.bind("<KeyRelease>", validate_number_input)
-
-    red_mage_level = ck.CTkEntry(master=magirange_window, textvariable=red_mage_level_var, placeholder_text="Red Mage Level")
-    red_mage_level.pack(pady=12, padx=10)
-    red_mage_level.bind("<KeyRelease>", validate_number_input)
+    create_input_frame(magirange_window, "Black Mage Level", black_mage_level_var)
+    create_input_frame(magirange_window, "Summoner Level", summoner_level_var)
+    create_input_frame(magirange_window, "Red Mage Level", red_mage_level_var)
 
     magirange_button = ck.CTkButton(master=magirange_window, text="Submit", command=open_healer_window)
     magirange_button.pack(pady=12, padx=10)
@@ -179,28 +179,17 @@ def open_healer_window():
     label = ck.CTkLabel(master=healer_window, text="Input your Warrior of Light's Healer Levels")
     label.pack(pady=12, padx=10)
 
-    white_mage_level = ck.CTkEntry(master=healer_window, textvariable=white_mage_level_var, placeholder_text="White Mage Level")
-    white_mage_level.pack(pady=12, padx=10)
-    white_mage_level.bind("<KeyRelease>", validate_number_input)
-
-    scholar_level = ck.CTkEntry(master=healer_window, textvariable=scholar_level_var, placeholder_text="Scholar Level")
-    scholar_level.pack(pady=12, padx=10)
-    scholar_level.bind("<KeyRelease>", validate_number_input)
-
-    astrologian_level = ck.CTkEntry(master=healer_window, textvariable=astrologian_level_var, placeholder_text="Astrologian Level")
-    astrologian_level.pack(pady=12, padx=10)
-    astrologian_level.bind("<KeyRelease>", validate_number_input)
-
-    sage_level = ck.CTkEntry(master=healer_window, textvariable=sage_level_var, placeholder_text="Sage Level")
-    sage_level.pack(pady=12, padx=10)
-    sage_level.bind("<KeyRelease>", validate_number_input)
+    create_input_frame(healer_window, "White Mage Level", white_mage_level_var)
+    create_input_frame(healer_window, "Scholar Level", scholar_level_var)
+    create_input_frame(healer_window, "Astrologian Level", astrologian_level_var)
+    create_input_frame(healer_window, "Sage Level", sage_level_var)
 
     healer_button = ck.CTkButton(master=healer_window, text="Submit", command=finish)
     healer_button.pack(pady=12, padx=10)
 
 def finish():
     global count
-    meleedps_window.destroy()
+    healer_window.destroy()
     root.deiconify()
     #count += 1
 
@@ -208,17 +197,16 @@ def finish():
     messagebox.showinfo("Info", "User data saved")
 
     print_user_data()
-    reset_variables()
 
     # if count == 4:
     new_frame = ck.CTkFrame(master=root)
     new_frame.pack(pady=10, padx=10, fill="both", expand=True)
-    label = ck.CTkLabel(master=new_frame, text="Search for a bouldering partner!")
+    label = ck.CTkLabel(master=new_frame, text="Look for your next Job to take!")
     label.pack(pady=12, padx=10)
     global entry2
     entry2 = ck.CTkEntry(master=new_frame, placeholder_text="Input Name")
     entry2.pack(pady=12, padx=10)
-    button1 = ck.CTkButton(master=new_frame, text="Find a Partner", hover_color="green", command=find_partner)
+    button1 = ck.CTkButton(master=new_frame, text="Recommend me a Class", hover_color="green", command=calculate_cosine_similarity)
     button1.pack(pady=12, padx=10)
     root.geometry("400x450")
 
@@ -241,6 +229,10 @@ def save_user_inputs():
         int(warrior_level_var.get() or 0),
         int(dark_knight_level_var.get() or 0),
         int(gunbreaker_level_var.get() or 0),
+        int(dragoon_level_var.get() or 0),
+        int(reaper_level_var.get() or 0),
+        int(monk_level_var.get() or 0),
+        int(samurai_level_var.get() or 0),
         int(ninja_level_var.get() or 0),
         int(viper_level_var.get() or 0),
         int(bard_level_var.get() or 0),
@@ -255,19 +247,21 @@ def save_user_inputs():
         int(sage_level_var.get() or 0)
     ]
 
-    user_inputs.append(user_data)    
+    user_inputs.append(user_data)  
 
 def print_user_data():
     print("Currently saved users: ")
     for user_data in user_inputs:
         print(f"{user_data[0]}: {user_data}")
     
-def calculate_cosine_similarity(user_name):
+def calculate_cosine_similarity():
+    user_name = entry2.get()
+
     # Convert user data to vectors
     user_vectors = []
     target_vector = None
     for user_data in user_inputs:
-        vector = [1 if val else 0 for val in user_data[1:]]
+        vector = [val for val in user_data[1:]]
         user_vectors.append(vector)
         if user_data[0] == user_name:
             target_vector = vector
@@ -276,6 +270,11 @@ def calculate_cosine_similarity(user_name):
         print(f"No data found for user: {user_name}")
         return
     
+    # Ensure all vectors have the same length
+    max_length = max(len(vector) for vector in user_vectors)
+    user_vectors = [vector + [0] * (max_length - len(vector)) for vector in user_vectors]
+    target_vector += [0] * (max_length - len(target_vector))
+
     # Calculate cosine similarity between the target user and other users
     user_vectors = np.array(user_vectors)
     target_vector = np.array(target_vector)
