@@ -31,33 +31,18 @@ problem4_var = tk.BooleanVar(value=False)
 problem5_var = tk.BooleanVar(value=False)
 problem6_var = tk.BooleanVar(value=False)
 
-user_inputs = []
-
-def save_user_inputs():
-    name = entry1.get()
-
-    user_data = [
-        name,
-        timeframe1_var.get(),
-        timeframe2_var.get(),
-        timeframe3_var.get(),
-        timeframe4_var.get(),
-        timeframe5_var.get(),
-        timeframe6_var.get(),
-        grades1_var.get(),
-        grades2_var.get(),
-        grades3_var.get(),
-        grades4_var.get(),
-        grades5_var.get(),
-        grades6_var.get(),
-        problem1_var.get(),
-        problem2_var.get(),
-        problem3_var.get(),
-        problem4_var.get(),
-        problem5_var.get(),
-        problem6_var.get()
-    ]
-    user_inputs.append(user_data)
+user_inputs = [
+    ['Dummy1', True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False],
+    ['Dummy2', False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True],
+    ['Dummy3', True, True, False, False, True, True, False, False, True, True, False, False, True, True, False, False, True, True],
+    ['Dummy4', False, False, True, True, False, False, True, True, False, False, True, True, False, False, True, True, False, False],
+    ['Dummy5', True, False, False, True, True, False, False, True, True, False, False, True, True, False, False, True, True, False],
+    ['Dummy6', False, True, True, False, False, True, True, False, False, True, True, False, False, True, True, False, False, True],
+    ['Dummy7', True, True, True, False, False, False, True, True, True, False, False, False, True, True, True, False, False, False],
+    ['Dummy8', False, False, False, True, True, True, False, False, False, True, True, True, False, False, False, True, True, True],
+    ['Dummy9', True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False],
+    ['Dummy10', False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True, False, True]
+]
 
 def open_timeframe_window():
     global timeframe_window
@@ -183,17 +168,17 @@ def finish():
     print_user_data()
     reset_variables()
 
-    if count == 4:
-        new_frame = ck.CTkFrame(master=root)
-        new_frame.pack(pady=10, padx=10, fill="both", expand=True)
-        label = ck.CTkLabel(master=new_frame, text="Search for a bouldering partner!")
-        label.pack(pady=12, padx=10)
-        global entry2
-        entry2 = ck.CTkEntry(master=new_frame, placeholder_text="Input Name")
-        entry2.pack(pady=12, padx=10)
-        button1 = ck.CTkButton(master=new_frame, text="Find a Partner", hover_color="green", command=find_partner)
-        button1.pack(pady=12, padx=10)
-        root.geometry("400x450")
+    # if count == 4:
+    new_frame = ck.CTkFrame(master=root)
+    new_frame.pack(pady=10, padx=10, fill="both", expand=True)
+    label = ck.CTkLabel(master=new_frame, text="Search for a bouldering partner!")
+    label.pack(pady=12, padx=10)
+    global entry2
+    entry2 = ck.CTkEntry(master=new_frame, placeholder_text="Input Name")
+    entry2.pack(pady=12, padx=10)
+    button1 = ck.CTkButton(master=new_frame, text="Find a Partner", hover_color="green", command=find_partner)
+    button1.pack(pady=12, padx=10)
+    root.geometry("400x450")
 
 def btn_continue():
     name = entry1.get()
@@ -204,6 +189,32 @@ def btn_continue():
 
 def btn_exit():
     root.destroy()
+
+def save_user_inputs():
+    name = entry1.get()
+
+    user_data = [
+        name,
+        timeframe1_var.get(),
+        timeframe2_var.get(),
+        timeframe3_var.get(),
+        timeframe4_var.get(),
+        timeframe5_var.get(),
+        timeframe6_var.get(),
+        grades1_var.get(),
+        grades2_var.get(),
+        grades3_var.get(),
+        grades4_var.get(),
+        grades5_var.get(),
+        grades6_var.get(),
+        problem1_var.get(),
+        problem2_var.get(),
+        problem3_var.get(),
+        problem4_var.get(),
+        problem5_var.get(),
+        problem6_var.get()
+    ]
+    user_inputs.append(user_data)    
 
 def print_user_data():
     print("Currently saved users: ")
