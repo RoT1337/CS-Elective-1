@@ -1,6 +1,7 @@
 import customtkinter as ck
 import tkinter as tk
 from tkinter import messagebox
+from PIL import Image
 import numpy as np
 from numpy.linalg import norm
 
@@ -54,14 +55,20 @@ def validate_number_input(event):
         entry.delete(0, tk.END)
         entry.insert(0, ''.join(filter(str.isdigit, value)))
 
-# ToDo: This PoS is putting out a white background and even bg_color cant fix.
-# I might turn into a valve developer and start crashing out I swear
-def create_input_frame(master, label_text, textvariable): 
-    frame = tk.Frame(master)
-    frame.pack(pady=12, padx=10, fill='x')
-    label = ck.CTkLabel(master=frame, text=label_text, bg_color="black")
+def load_image(image_path, size=(30, 30)):
+    image = Image.open(image_path)
+    image = image.resize(size, Image.Resampling.LANCZOS)
+    return ck.CTkImage(light_image=image, dark_image=image, size=size)
+
+def create_input_frame(master, image_path, textvariable):
+    bg_color = master.cget("bg")
+    frame = tk.Frame(master, bg=bg_color)
+    frame.pack(pady=12, padx=100, fill='x', expand=True, anchor='center')
+    image = load_image(image_path)
+    label = ck.CTkLabel(master=frame, image=image, text="", bg_color=bg_color)
+    label.image = image
     label.pack(side='left')
-    entry = ck.CTkEntry(master=frame, textvariable=textvariable, width=200, bg_color="black")
+    entry = ck.CTkEntry(master=frame, textvariable=textvariable, width=200, bg_color=bg_color)
     entry.pack(side='left', padx=10)
     entry.bind("<KeyRelease>", validate_number_input)
     return entry
@@ -83,10 +90,10 @@ def open_tank_window():
     label = ck.CTkLabel(master=tank_window, text="Input your Warrior of Light's Tank Levels")
     label.pack(pady=12, padx=10)
 
-    create_input_frame(tank_window, "Paladin Level", paladin_level_var)
-    create_input_frame(tank_window, "Warrior Level", warrior_level_var)
-    create_input_frame(tank_window, "Dark Knight Level", dark_knight_level_var)
-    create_input_frame(tank_window, "Gunbreaker Level", gunbreaker_level_var)
+    create_input_frame(tank_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/01_TANK/Job/Paladin.png", paladin_level_var)
+    create_input_frame(tank_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/01_TANK/Job/Warrior.png", warrior_level_var)
+    create_input_frame(tank_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/01_TANK/Job/DarkKnight.png", dark_knight_level_var)
+    create_input_frame(tank_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/01_TANK/Job/Gunbreaker.png", gunbreaker_level_var)
 
     tank_button = ck.CTkButton(master=tank_window, text="Continue", command=open_meleedps_window)
     tank_button.pack(pady=12, padx=10)
@@ -107,12 +114,12 @@ def open_meleedps_window():
     label = ck.CTkLabel(master=meleedps_window, text="Input your Warrior of Light's Melee DPS Levels")
     label.pack(pady=12, padx=10)
 
-    create_input_frame(meleedps_window, "Dragoon Level", dragoon_level_var)
-    create_input_frame(meleedps_window, "Reaper Level", reaper_level_var)
-    create_input_frame(meleedps_window, "Monk Level", monk_level_var)
-    create_input_frame(meleedps_window, "Samurai Level", samurai_level_var)
-    create_input_frame(meleedps_window, "Ninja Level", ninja_level_var)
-    create_input_frame(meleedps_window, "Viper Level", viper_level_var)
+    create_input_frame(meleedps_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/03_DPS/Job/Dragoon.png", dragoon_level_var)
+    create_input_frame(meleedps_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/03_DPS/Job/Reaper.png", reaper_level_var)
+    create_input_frame(meleedps_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/03_DPS/Job/Monk.png", monk_level_var)
+    create_input_frame(meleedps_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/03_DPS/Job/Samurai.png", samurai_level_var)
+    create_input_frame(meleedps_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/03_DPS/Job/Ninja.png", ninja_level_var)
+    create_input_frame(meleedps_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/03_DPS/Job/Viper.png", viper_level_var)
 
     meleedps_button = ck.CTkButton(master=meleedps_window, text="Submit", command=open_physrange_dps)
     meleedps_button.pack(pady=12, padx=10)
@@ -133,9 +140,9 @@ def open_physrange_dps():
     label = ck.CTkLabel(master=physrange_window, text="Input your Warrior of Light's Physical Ranged DPS Levels")
     label.pack(pady=12, padx=10)
 
-    create_input_frame(physrange_window, "Bard Level", bard_level_var)
-    create_input_frame(physrange_window, "Machinist Level", machinist_level_var)
-    create_input_frame(physrange_window, "Dancer Level", dancer_level_var)
+    create_input_frame(physrange_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/03_DPS/Job/Bard.png", bard_level_var)
+    create_input_frame(physrange_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/03_DPS/Job/Machinist.png", machinist_level_var)
+    create_input_frame(physrange_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/03_DPS/Job/Dancer.png", dancer_level_var)
 
     physrange_button = ck.CTkButton(master=physrange_window, text="Submit", command=open_magirange_dps)
     physrange_button.pack(pady=12, padx=10)
@@ -156,9 +163,9 @@ def open_magirange_dps():
     label = ck.CTkLabel(master=magirange_window, text="Input your Warrior of Light's Magical Ranged DPS Levels")
     label.pack(pady=12, padx=10)
 
-    create_input_frame(magirange_window, "Black Mage Level", black_mage_level_var)
-    create_input_frame(magirange_window, "Summoner Level", summoner_level_var)
-    create_input_frame(magirange_window, "Red Mage Level", red_mage_level_var)
+    create_input_frame(magirange_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/03_DPS/Job/BlackMage.png", black_mage_level_var)
+    create_input_frame(magirange_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/03_DPS/Job/Summoner.png", summoner_level_var)
+    create_input_frame(magirange_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/03_DPS/Job/RedMage.png", red_mage_level_var)
 
     magirange_button = ck.CTkButton(master=magirange_window, text="Submit", command=open_healer_window)
     magirange_button.pack(pady=12, padx=10)
@@ -179,10 +186,10 @@ def open_healer_window():
     label = ck.CTkLabel(master=healer_window, text="Input your Warrior of Light's Healer Levels")
     label.pack(pady=12, padx=10)
 
-    create_input_frame(healer_window, "White Mage Level", white_mage_level_var)
-    create_input_frame(healer_window, "Scholar Level", scholar_level_var)
-    create_input_frame(healer_window, "Astrologian Level", astrologian_level_var)
-    create_input_frame(healer_window, "Sage Level", sage_level_var)
+    create_input_frame(healer_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/02_HEALER/Job/WhiteMage.png", white_mage_level_var)
+    create_input_frame(healer_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/02_HEALER/Job/Scholar.png", scholar_level_var)
+    create_input_frame(healer_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/02_HEALER/Job/Astrologian.png", astrologian_level_var)
+    create_input_frame(healer_window, "C:/Computer Science/3rdYear/CS-Elective-1/content-filtering/JobIcons/02_HEALER/Job/Sage.png", sage_level_var)
 
     healer_button = ck.CTkButton(master=healer_window, text="Submit", command=finish)
     healer_button.pack(pady=12, padx=10)
@@ -206,7 +213,7 @@ def finish():
     global entry2
     entry2 = ck.CTkEntry(master=new_frame, placeholder_text="Input Name")
     entry2.pack(pady=12, padx=10)
-    button1 = ck.CTkButton(master=new_frame, text="Recommend me a Class", hover_color="green", command=calculate_cosine_similarity)
+    button1 = ck.CTkButton(master=new_frame, text="Recommend me a Class", hover_color="green", command=lambda: recommend_next_job(entry2.get()))
     button1.pack(pady=12, padx=10)
     root.geometry("400x450")
 
@@ -254,9 +261,7 @@ def print_user_data():
     for user_data in user_inputs:
         print(f"{user_data[0]}: {user_data}")
     
-def calculate_cosine_similarity():
-    user_name = entry2.get()
-
+def calculate_cosine_similarity(user_name):
     # Convert user data to vectors
     user_vectors = []
     target_vector = None
@@ -268,7 +273,7 @@ def calculate_cosine_similarity():
     
     if target_vector is None:
         print(f"No data found for user: {user_name}")
-        return
+        return []
     
     # Ensure all vectors have the same length
     max_length = max(len(vector) for vector in user_vectors)
@@ -292,6 +297,59 @@ def calculate_cosine_similarity():
     print(f"Cosine Similarity Scores for {user_name}:")
     for name, score in similarity_scores:
         print(f"{name}: {score}")
+
+    return similarity_scores
+
+def recommend_next_job(user_name):
+    # List of job names corresponding to the indices
+    job_names = [
+        "Paladin", "Warrior", "Dark Knight", "Gunbreaker",
+        "Dragoon", "Reaper", "Monk", "Samurai", "Ninja", "Viper",
+        "Bard", "Machinist", "Dancer", "Black Mage", "Summoner",
+        "Red Mage", "White Mage", "Scholar", "Astrologian", "Sage"
+    ]
+
+    # Find the target user data
+    target_user_data = None
+    for user_data in user_inputs:
+        if user_data[0] == user_name:
+            target_user_data = user_data
+            break
+    
+    if target_user_data is None:
+        print(f"No data found for user: {user_name}")
+        return
+    
+    # Calculate cosine similarity
+    similarity_scores = calculate_cosine_similarity(user_name)
+    
+    # Find jobs with level 0 in the target user's data
+    zero_level_jobs = [i for i, level in enumerate(target_user_data[1:], start=1) if level == 0]
+    
+    # Calculate recommended ratings for each job with level 0
+    recommended_jobs = []
+    for job_index in zero_level_jobs:
+        numerator = 0
+        denominator = 0
+        for name, similarity in similarity_scores:
+            for user_data in user_inputs:
+                if user_data[0] == name:
+                    if len(user_data) > job_index + 1 and user_data[job_index + 1] > 0:  # Adjust index to account for the user name
+                        numerator += similarity * user_data[job_index + 1]
+                        denominator += similarity
+        if denominator > 0:
+            recommended_rating = numerator / denominator
+            recommended_jobs.append((job_index, recommended_rating))
+    
+    # Sort recommended jobs by rating in descending order
+    recommended_jobs.sort(key=lambda x: x[1], reverse=True)
+    
+    # Print recommended jobs with names
+    for job_index, rating in recommended_jobs:
+        job_name = job_names[job_index - 1]  # Adjust index if needed
+        print(f"{job_name}: Recommended rating {rating}")
+    
+    return recommended_jobs
 
 window_width = 400
 window_height = 300
